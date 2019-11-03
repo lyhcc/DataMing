@@ -13414,7 +13414,7 @@ div#notebook {
     <span class="k">return</span> <span class="n">s</span>
 
 <span class="k">def</span> <span class="nf">gen_closure</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ms</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;----------------=&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------FCC---------&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------------------&quot;</span><span class="p">)</span>
     <span class="n">closure</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">ms</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">column</span><span class="p">])</span>
@@ -13505,7 +13505,9 @@ div#notebook {
     <span class="n">FC</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">support_series</span><span class="p">[</span><span class="n">support_series</span> <span class="o">&gt;=</span> <span class="n">support</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
     <span class="n">closure</span> <span class="o">=</span> <span class="n">closure</span><span class="p">[</span><span class="n">FC</span><span class="p">]</span>
     <span class="n">support_series</span> <span class="o">=</span> <span class="n">support_series</span><span class="p">[</span><span class="n">FC</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;support_series&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">support_series</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;closure&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">closure</span><span class="p">[</span><span class="n">FC</span><span class="p">])</span>
     
     
@@ -13532,7 +13534,7 @@ div#notebook {
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***&quot;</span><span class="p">)</span>
     <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">support_series</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---Support Series----&quot;</span><span class="p">)</span>
     <span class="n">support_series</span> <span class="o">=</span> <span class="n">deriving_frequent_itemsets</span><span class="p">(</span><span class="n">closure</span><span class="p">,</span> <span class="n">support_series</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">ms</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">support_series</span><span class="p">)</span>
     

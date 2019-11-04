@@ -13403,7 +13403,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">subset</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -13456,7 +13456,7 @@ div#notebook {
             <span class="k">return</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="kc">True</span>
     
-<span class="k">def</span> <span class="nf">deriving_frequent_itemsets</span><span class="p">(</span> <span class="n">closure</span><span class="p">,</span> <span class="n">support_series</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ms</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">deriving_frequent_itemsets</span><span class="p">(</span><span class="n">closure</span><span class="p">,</span> <span class="n">support_series</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ms</span><span class="p">):</span>
     <span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
     
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -13477,10 +13477,16 @@ div#notebook {
                 
                 <span class="k">if</span> <span class="n">s</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
                     <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                    <span class="c1"># print(pd.Series(1, index=[ms.join(sorted(s))]))</span>
+                    
+                    
                     <span class="k">if</span> <span class="n">ms</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">support_series</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
                         <span class="n">support_series</span> <span class="o">=</span> <span class="n">support_series</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">support_series</span><span class="p">[</span><span class="n">ms</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">j</span><span class="p">))],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">ms</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="p">))]))</span>
-    
-    <span class="k">return</span> <span class="n">support_series</span>
+                        <span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">ms</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="p">))])</span>
+                        <span class="n">tmp</span><span class="p">[</span><span class="n">ms</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="p">))]</span> <span class="o">=</span> <span class="n">s</span>
+                        <span class="n">closure</span> <span class="o">=</span> <span class="n">closure</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">closure</span><span class="p">,</span> <span class="n">support_series</span>
     
 </pre></div>
 
@@ -13491,7 +13497,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">closure_rule</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">support</span><span class="p">,</span> <span class="n">confidence</span><span class="p">,</span> <span class="n">ms</span><span class="p">):</span>
@@ -13535,10 +13541,10 @@ div#notebook {
     <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">support_series</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---Support Series----&quot;</span><span class="p">)</span>
-    <span class="n">support_series</span> <span class="o">=</span> <span class="n">deriving_frequent_itemsets</span><span class="p">(</span><span class="n">closure</span><span class="p">,</span> <span class="n">support_series</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">ms</span><span class="p">)</span>
+    <span class="n">closure</span><span class="p">,</span> <span class="n">support_series</span> <span class="o">=</span> <span class="n">deriving_frequent_itemsets</span><span class="p">(</span><span class="n">closure</span><span class="p">,</span> <span class="n">support_series</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">ms</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">support_series</span><span class="p">)</span>
     
-        
+    
 
 <span class="c1">#     print(closure)</span>
     <span class="n">column2</span> <span class="o">=</span> <span class="p">[]</span>
@@ -13551,7 +13557,7 @@ div#notebook {
 
         
 
-
+    <span class="nb">print</span><span class="p">(</span><span class="n">column2</span><span class="p">)</span>
     <span class="c1"># 定义置信度序列</span>
     <span class="n">confidence_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">ms</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">column2</span><span class="p">])</span>
     
@@ -13585,22 +13591,24 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>----------------=
+<pre>-------FCC---------
 [&#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39;b&#39;, &#39;d&#39;]
 ------------------
+support_series
 a    0.7
 c    0.7
 e    0.3
 b    0.8
 d    0.2
 dtype: float64
+closure
 a          [a]
 c          [c]
 e    [a, c, e]
 b          [b]
 d       [b, d]
 dtype: object
-----------------=
+-------FCC---------
 [[&#39;a&#39;, &#39;c&#39;], [&#39;a&#39;, &#39;b&#39;], [&#39;a&#39;, &#39;d&#39;], [&#39;b&#39;, &#39;c&#39;], [&#39;c&#39;, &#39;d&#39;], [&#39;b&#39;, &#39;e&#39;], [&#39;d&#39;, &#39;e&#39;]]
 ------------------
 a--c    0.5
@@ -13626,7 +13634,7 @@ a--b       [a, b]
 b--c       [c, b]
 dtype: object
 ***
-----------------=
+-------FCC---------
 [[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]]
 ------------------
 a--b--c    0.3
@@ -13645,7 +13653,7 @@ b--c          [c, b]
 a--b--c    [a, c, b]
 dtype: object
 ***
-----------------=
+-------FCC---------
 []
 ------------------
 Series([], dtype: float64)
@@ -13672,7 +13680,7 @@ a--b       0.5
 b--c       0.5
 a--b--c    0.3
 dtype: float64
--------
+---Support Series----
 a          0.7
 c          0.7
 e          0.3
@@ -13687,13 +13695,14 @@ b--d       0.2
 c--e       0.3
 a--e       0.3
 dtype: float64
+[[&#39;c&#39;, &#39;e&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;e&#39;, &#39;c&#39;], [&#39;a&#39;, &#39;c&#39;, &#39;e&#39;], [&#39;d&#39;, &#39;b&#39;], [&#39;b&#39;, &#39;d&#39;], [&#39;c&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;c&#39;], [&#39;b&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;b&#39;], [&#39;b&#39;, &#39;c&#39;], [&#39;c&#39;, &#39;b&#39;], [&#39;c&#39;, &#39;b&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], [&#39;a&#39;, &#39;c&#39;, &#39;b&#39;], [&#39;e&#39;, &#39;c&#39;], [&#39;c&#39;, &#39;e&#39;], [&#39;e&#39;, &#39;a&#39;], [&#39;a&#39;, &#39;e&#39;]]
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[61]:</div>
+    <div class="prompt output_prompt">Out[41]:</div>
 
 
 
@@ -13728,6 +13737,16 @@ dtype: float64
     </tr>
     <tr>
       <td>a--e--c</td>
+      <td>0.3</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <td>e--c</td>
+      <td>0.3</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <td>e--a</td>
       <td>0.3</td>
       <td>1.000000</td>
     </tr>

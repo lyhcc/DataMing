@@ -6,3 +6,4 @@
   - [Closure](https://lyhcc.github.io/DataMing/Assosiation_Closure.html)
   - FP-Tree
 - 聚类
+  - [DIANA](https://lyhcc.github.io/DataMing/Cluster_DIANA.html)
